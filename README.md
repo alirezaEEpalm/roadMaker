@@ -57,7 +57,7 @@ road.plotRoad();
 5. **Export the route**  
    - Click the "Share" button in the route panel
    - Select "Download as GPX" or "GeoJSON" option  
-     ![Route selection example](map%20data/route1-chicago_downtown.png)
+     ![Route selection example](map%20data/images/route1-chicago_downtown.png)
 
 6. **Save the file**  
    - Name the file (e.g., `route.json`)
@@ -76,10 +76,10 @@ road.animateRoute(15, 100, 0.1);
 ## Results
 Example : Marseille, France Route
 Original map route from OpenStreetMap:
-![Route selection example](map%20data/route2-Marseille_France.png)
+![Route selection example](map%20data/images/route2-Marseille_France.png)
 
 Processed road visualization using roadMaker:
-![Route selection example](map%20data/route2_Marseille_roadMaker.png)
+![Route selection example](map%20data/images/route2_Marseille_roadMaker.png)
 
 The original geographic route converted to Cartesian coordinates
 
