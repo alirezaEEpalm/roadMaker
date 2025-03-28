@@ -86,3 +86,77 @@ The original geographic route converted to Cartesian coordinates
 Generated lanes with proper width and curvature
 
 Smooth transition between road segments
+
+## Class Reference: roadMaker
+
+### Properties
+
+| Property           | Type      | Description |
+|--------------------|-----------|-------------|
+| `roadType`         | string    | `'symbolic'` or `'map'` |
+| `numberOfLines`    | integer   | Number of lanes |
+| `lineWidth`        | double    | Lane width in meters |
+| `dx`               | double    | Spatial resolution (meters) |
+| `plotFlag`         | string    | `'yes'`/`'no'` for automatic plotting |
+| `functionBasedFlag`| logical   | Use symbolic calculations (`true` for symbolic roads) |
+| **Symbolic Road**  |           | *(Only when `roadType='symbolic'`)* |
+| `symbolic.x`       | sym       | Symbolic x-variable |
+| `symbolic.y`       | sym       | Symbolic road function (e.g., `15*sin(0.05*x)`) |
+| `symbolic.road_xLength` | double | Road length in x-direction (meters) |
+| **Map Road**       |           | *(Only when `roadType='map'`)* |
+| `map.data`         | struct    | Raw JSON route data |
+| `map.latitude`     | double[]  | Latitude coordinates |
+| `map.longitude`    | double[]  | Longitude coordinates |
+| **Computed**       |           | *(Available after construction)* |
+| `xVec`, `yVec`     | double[]  | Road coordinates |
+| `sVec`             | double[]  | Arc length vector |
+| `kappaVec`         | double[]  | Curvature at each point |
+| `diffVec`          | double[]  | First derivatives |
+| `interpSetup`      | struct    | Interpolation functions |
+| `waypoint`         | struct    | Generated waypoint data |
+
+### Key Methods
+
+#### Core Functions
+| Method | Description |
+|--------|-------------|
+| `roadMaker()` | Constructor (see Usage examples) |
+| `computeSymbolicRoad()` | Calculates derivatives/curvature for symbolic roads |
+| `computeMapRoad()` | Processes geographic data into Cartesian coordinates |
+
+#### Visualization
+| Method | Description |
+|--------|-------------|
+| `plotRoad()` | Plots road with lanes and boundaries |
+| `plotCurvature()` | Shows curvature vs. distance (symbolic roads only) |
+| `animateRoute(zoomLevel, stepSize, pauseTime)` | Animates map route on geographic plot |
+
+#### Utilities
+| Method | Description |
+|--------|-------------|
+| `precomputeInterpolants()` | Generates interpolation functions for later use |
+| `waypointGenerator(np, starting)` | Creates smooth random waypoints within lanes |
+| `checkCurvature()` | Validates if curvature is too tight for lane width |
+
+### Features
+
+**Road Generation:**
+- Symbolic math integration for function-based roads
+- Real-world map data processing (GeoJSON/GPX)
+- Automatic lane boundary calculation
+- Coordinate system normalization
+
+**Analysis:**
+- Curvature calculation (both symbolic and numerical)
+- Arc length parameterization
+- Derivative estimation (1st/2nd order)
+
+**Visualization:**
+- Multi-lane road plotting
+- Geographic route animation
+- Curvature profile visualization
+
+**Utilities:**
+- Waypoint generation with lane constraints
+- Interpolation functions for path parameterization
+- Automatic coordinate transformation (lat/long → Cartesian)
